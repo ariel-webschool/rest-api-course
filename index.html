@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Introduction au Protocole HTTP et au REST API</title>
+        <meta charset='utf-8'/>
+        <link rel="stylesheet" type="text/css" href="./index.html_files/github-markdown.css">
+        <style>
+            .markdown-body {
+                box-sizing: border-box;
+                min-width: 200px;
+                max-width: 980px;
+                margin: 0 auto;
+                padding: 45px;
+            }
+        </style>
+        <script>
+            window.onload = function() {
+                if (document.querySelector("script[type=\"math/tex; mode=display\"]") !== null) {
+                    var mathjax = document.createElement("script");
+                    mathjax.src = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML";
+                    document.head.appendChild(mathjax);
+                }
+                if (document.getElementsByTagName("code").length !== 0) {
+                    var highlight = document.createElement("script");
+                    var highlightcss = document.createElement("link");
+                    highlight.src = "http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js";
+                    highlightcss.rel = "stylesheet";
+                    highlightcss.href = "http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/github.min.css";
+                    highlight.onload = function() {hljs.initHighlighting();};
+                    document.head.appendChild(highlight);
+                    document.head.appendChild(highlightcss);
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <article class="markdown-body">
+            <p><img src="index.html_files\images\logo.png" alt="Image"></p>
+<h1 id="introduction-au-protocole-http-et-au-rest-api">Introduction au Protocole HTTP et au REST API</h1>
+<h2 id="qu-est-ce-que-le-protocole-http">Qu&#39;est-ce que le protocole HTTP ?</h2>
+<p>HTTP (HyperText Transfer Protocol) est un protocole de communication utilisé pour échanger des données sur le web. Il est basé sur un modèle client-serveur où :</p>
+<ul>
+<li><strong>Le client</strong> (navigateur ou application) envoie une requête au serveur.</li><li><strong>Le serveur</strong> répond avec les données demandées ou un message d&#39;erreur.</li></ul>
+<h3 id="caract%C3%A9ristiques-principales">Caractéristiques principales :</h3>
+<ul>
+<li>Basé sur des requêtes et réponses.</li><li>Fonctionne via les méthodes (ou verbes) HTTP :<ul>
+<li><strong>GET</strong> : Récupérer des données.</li><li><strong>POST</strong> : Envoyer des données au serveur.</li><li><strong>PUT</strong> : Mettre à jour des données.</li><li><strong>DELETE</strong> : Supprimer des données.</li></ul>
+</li></ul>
+<h3 id="exemple-de-requ%C3%AAte-http">Exemple de requête HTTP :</h3>
+<pre><code class="lang-http">GET /api/users HTTP/1.1
+Host: example.com
+</code></pre>
+<h3 id="exemple-de-r%C3%A9ponse-http">Exemple de réponse HTTP :</h3>
+<pre><code class="lang-http">HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  &quot;users&quot;: [
+    {&quot;id&quot;: 1, &quot;name&quot;: &quot;Alice&quot;},
+    {&quot;id&quot;: 2, &quot;name&quot;: &quot;Bob&quot;}
+  ]
+}
+</code></pre>
+<h2 id="qu-est-ce-qu-une-rest-api">Qu&#39;est-ce qu&#39;une REST API ?</h2>
+<p>REST (REpresentational State Transfer) est une architecture pour concevoir des services web basés sur HTTP. Une API REST expose des points d&#39;entrée (endpoints) pour permettre aux clients d&#39;interagir avec des ressources.</p>
+<h3 id="principes-cl%C3%A9s-de-rest">Principes clés de REST :</h3>
+<ol>
+<li><strong>Basé sur HTTP</strong> : Utilise les méthodes HTTP pour interagir avec les ressources.</li><li><strong>Stateless</strong> : Chaque requête est indépendante et contient toutes les informations nécessaires.</li><li><strong>Représentation des ressources</strong> : Les ressources (utilisateurs, articles, etc.) sont représentées sous forme de JSON, XML, etc.</li><li><strong>URI explicites</strong> : Les URI identifient clairement les ressources (exemple : <code>/users/1</code> pour un utilisateur spécifique).</li></ol>
+<h3 id="exemple-d-endpoints-rest">Exemple d&#39;Endpoints REST :</h3>
+<table>
+<thead>
+<tr>
+<th>Méthode</th>
+<th>URI</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>/users</td>
+<td>Récupérer tous les utilisateurs</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/users/1</td>
+<td>Récupérer un utilisateur spécifique</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/users</td>
+<td>Créer un utilisateur</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>/users/1</td>
+<td>Mettre à jour un utilisateur</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>/users/1</td>
+<td>Supprimer un utilisateur</td>
+</tr>
+</tbody>
+</table>
+<h3 id="exemple-de-requ%C3%AAte-rest">Exemple de requête REST :</h3>
+<pre><code class="lang-http">POST /api/users HTTP/1.1
+Host: example.com
+Content-Type: application/json
+
+{
+  &quot;name&quot;: &quot;Charlie&quot;,
+  &quot;email&quot;: &quot;charlie@example.com&quot;
+}
+</code></pre>
+<h3 id="exemple-de-r%C3%A9ponse-rest">Exemple de réponse REST :</h3>
+<pre><code class="lang-http">HTTP/1.1 201 Created
+Location: /api/users/3
+
+{
+  &quot;id&quot;: 3,
+  &quot;name&quot;: &quot;Charlie&quot;,
+  &quot;email&quot;: &quot;charlie@example.com&quot;
+}
+</code></pre>
+<p>REST API permet de connecter applications et services de manière standardisée, tout en restant simple à utiliser.</p>
+
+        </article>
+    </body>
+</html>
